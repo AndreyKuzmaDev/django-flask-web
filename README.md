@@ -1,1 +1,1 @@
-# django-flask-web
+# Django and something other
