@@ -7,8 +7,8 @@ class InMemoryUsersRepo:
         self.by_id = {}
 
     def get_by_name(self, name):
-        for _,value in self.by_id.items():
-            if value.name == name:
+        for _, value in self.by_id.items():
+            if value.username == name:
                 return value
         return None
 
@@ -20,4 +20,13 @@ class InMemoryUsersRepo:
         self.by_id[new_user.id] = new_user
         self.next_id += 1
         return new_user
+
+    def authorize(self, username, password):
+        found = self.get_by_name(username)
+        if found is None:
+            return None, 'user not found'  # пользователя не нашли
+        if found.password != password:
+            return None, 'bad password'
+        return found, ''
+
     
